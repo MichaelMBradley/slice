@@ -4,4 +4,5 @@ import wasmPack from "vite-plugin-wasm-pack";
 export default defineConfig({
 	plugins: [wasmPack("./logic")],
 	clearScreen: false,
+	base: "",
 });
