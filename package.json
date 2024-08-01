@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "wasm": "wasm-pack build ./logic --target web",
-    "dev": "yarn wasm && vite",
-    "build": "yarn wasm && tsc && vite build",
-    "preview": "vite preview"
+    "build": "yarn wasm && vite build && tsc",
+    "preview": "yarn build && vite preview"
   },
   "devDependencies": {
     "prettier": "^3.3.3",
