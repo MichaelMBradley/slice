@@ -1,0 +1,33 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			// Using the standard Vite development runner would be better,
+			// but it doesn't play nice with serving WASM files :(
+			"label": "Build",
+			"detail": "Builds the project for release and then previews it",
+			"command": "yarn",
+			"args": [
+				"preview",
+			],
+			"type": "process",
+			"isBackground": true,
+			"problemMatcher": [
+				"$rustc",
+				"$tsc",
+			],
+			"echoCommand": true,
+			"group": {
+				"kind": "build",
+				"isDefault": true,
+			},
+			"runOptions": {
+				"instanceLimit": 1,
+			},
+			"icon": {
+				"id": "preview",
+				"color": "terminal.ansiGreen",
+			},
+		}
+	]
+}

@@ -1,0 +1,7 @@
+// Apply this to your local keybindings.json to make this build task better
+// Doesn't seem like there's a way to make this workspace-specific
+{
+	"key": "ctrl+shift+b",
+	"command": "workbench.action.tasks.restartTask",
+	"when": "taskRunning"
+}
