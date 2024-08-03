@@ -1,7 +1,7 @@
 import init, { rust_greet, rust_init } from "logic";
 
-import vertSource from "/public/vert.vs?raw";
-import fragSource from "/public/frag.fs?raw";
+import vertSource from "./vert.vs?raw";
+import fragSource from "./frag.fs?raw";
 
 // Start initializing immediately
 const initialized = init();
