@@ -10,5 +10,13 @@
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "rust-lang.rust-analyzer",
 	},
+	"[json]": {
+		"editor.quickSuggestions": {
+			"strings": true
+		},
+		"editor.suggest.insertMode": "replace",
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "vscode.json-language-features",
+	},
 	"vite.autoStart": false,
 }
