@@ -1,5 +1,5 @@
-import vertSource from "./vert.vs?raw";
-import fragSource from "./frag.fs?raw";
+import vertSource from "./vert.vs";
+import fragSource from "./frag.fs";
 
 import { hypercube_array_length, initialize_hypercube } from "logic";
 

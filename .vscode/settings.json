@@ -3,6 +3,7 @@
 		"bindgen",
 		"Colour",
 		"Colours",
+		"glsl",
 		"tseslint"
 	],
 	"editor.formatOnType": false,
