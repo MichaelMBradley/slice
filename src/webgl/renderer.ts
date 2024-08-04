@@ -1,8 +1,8 @@
 import { WebGL } from ".";
 
-export type BaseRenderState = {
+export interface BaseRenderState {
 	readonly gl: WebGL;
-};
+}
 
 export type ContinuousRenderState<State extends BaseRenderState> = State & {
 	readonly fps: number;

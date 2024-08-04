@@ -8,7 +8,7 @@ import { compileShaderProgram } from "../webgl/program";
 import { BaseRenderState, ContinuousRenderState, startContinuousRender } from "../webgl/renderer";
 
 const getVertices = (dimensions: number): Float32Array => {
-	let vertices = new Float32Array(hypercube_array_length(dimensions));
+	const vertices = new Float32Array(hypercube_array_length(dimensions));
 	initialize_hypercube(dimensions, vertices);
 	return vertices;
 };
@@ -35,17 +35,17 @@ const drawFunc = (state: HeaderState) => {
 export const animateHeader = (fps: number): void => {
 	const canvas = getCanvas("header");
 	if (!canvas) {
-		return console.error("Could not find the header canvas");
+		throw Error("Could not find the header canvas");
 	}
 
 	const gl = getWebGLContext(canvas);
 	if (!gl) {
-		return console.error("Could not get a WebGL context");
+		throw Error("Could not get a WebGL context");
 	}
 
 	const shaderProgram = compileShaderProgram(gl, vertSource, fragSource);
 	if (!shaderProgram) {
-		return console.error("Could not create a shader program");
+		throw Error("Could not create a shader program");
 	}
 	gl.useProgram(shaderProgram);
 

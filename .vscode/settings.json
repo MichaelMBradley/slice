@@ -2,14 +2,17 @@
 	"cSpell.words": [
 		"bindgen",
 		"Colour",
-		"Colours"
+		"Colours",
+		"tseslint"
 	],
+	"editor.formatOnType": false,
+	"editor.formatOnPaste": false,
+	"editor.formatOnSave": true,
+	"editor.insertSpaces": false,
 	"[typescript]": {
-		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 	},
 	"[rust]": {
-		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "rust-lang.rust-analyzer",
 	},
 	"[json]": {
@@ -17,7 +20,6 @@
 			"strings": true
 		},
 		"editor.suggest.insertMode": "replace",
-		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "vscode.json-language-features",
 	},
 	"vite.autoStart": false,

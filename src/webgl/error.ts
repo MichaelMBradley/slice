@@ -29,7 +29,7 @@ const stringifyGLError = (code: GLenum): string => {
 		// The above are all the codes that can be returned, according to:
 		// https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getError
 		default:
-			return `WebGL error code "${code}" not recognized`;
+			return `WebGL error code "${code.toString()}" not recognized`;
 	}
 };
 

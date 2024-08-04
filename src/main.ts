@@ -13,5 +13,11 @@ const main = (): void => {
 
 // As soon as the page load is done and initialization is complete, run the main function
 document.addEventListener("DOMContentLoaded", () => {
-	Promise.all([initialized]).then(() => main());
+	Promise.all([initialized])
+		.then(() => {
+			main();
+		})
+		.catch((rejected: unknown) => {
+			console.error(rejected);
+		});
 });
