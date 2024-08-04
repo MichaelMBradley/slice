@@ -1,4 +1,4 @@
-import init_wasm, { rust_greet, rust_init } from "logic";
+import init_wasm, { rust_init } from "logic";
 import { animateHeader } from "./header/header";
 
 // Start initializing WASM streaming immediately
@@ -8,7 +8,6 @@ const main = (): void => {
 	// Run any Rust (WASM) initialization, like attaching the panic!() handler
 	rust_init();
 
-	rust_greet();
 	animateHeader();
 };
 

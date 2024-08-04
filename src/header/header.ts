@@ -2,7 +2,14 @@ import vertSource from "./vert.vs?raw";
 import fragSource from "./frag.fs?raw";
 
 import { getCanvas, getWebGLContext } from "../html";
+import { hypercube_array_length, initialize_hypercube } from "logic";
 import { compileShaderProgram } from "../program";
+
+const getVertices = (dimensions: number): Float32Array => {
+	let vertices = new Float32Array(hypercube_array_length(dimensions));
+	initialize_hypercube(dimensions, vertices);
+	return vertices;
+};
 
 export const animateHeader = (): void => {
 	const canvas = getCanvas("header");
@@ -24,4 +31,6 @@ export const animateHeader = (): void => {
 	gl.viewport(0, 0, canvas.width, canvas.height);
 	gl.clearColor(0, 0, 0, 1);
 	gl.clear(gl.COLOR_BUFFER_BIT);
+
+	console.log(getVertices(12));
 };

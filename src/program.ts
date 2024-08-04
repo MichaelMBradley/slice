@@ -4,6 +4,8 @@ import { clearGLError, flushGLError } from "./webgl";
 
 /** Creates a shader program using a vertex and fragment shader */
 export const compileShaderProgram = (gl: WebGL, vertSource: string, fragSource: string): WebGLProgram | null => {
+	// I considered making a more generic function that accepted a list of shader types and sources to
+	// compile together, but WebGL only supports vertex and fragment shaders so there's no point
 	clearGLError(gl);
 
 	// Gonna make an executive decision to just not error check `gl.deleteShader()`
