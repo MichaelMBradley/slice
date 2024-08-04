@@ -1,4 +1,6 @@
-import { WebGL, Canvas } from "./types";
+import { WebGL } from "../webgl";
+
+export type Canvas = HTMLCanvasElement;
 
 /** Retrieves and verifies the canvas with id `canvas-${idPart}` */
 export const getCanvas = (idPart: string): Canvas | null => {

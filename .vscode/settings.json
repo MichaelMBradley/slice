@@ -1,6 +1,8 @@
 {
 	"cSpell.words": [
-		"bindgen"
+		"bindgen",
+		"Colour",
+		"Colours"
 	],
 	"[typescript]": {
 		"editor.formatOnSave": true,

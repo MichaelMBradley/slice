@@ -1,4 +1,4 @@
-import { WebGL } from "./types";
+import { WebGL } from ".";
 
 /** Returns a string representation of a GL error */
 const stringifyGLError = (code: GLenum): string => {

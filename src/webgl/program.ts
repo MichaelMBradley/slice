@@ -1,6 +1,6 @@
-import { WebGL } from "./types";
+import { WebGL } from ".";
 import { compileFragmentShader, compileVertexShader } from "./shader";
-import { clearGLError, flushGLError } from "./webgl";
+import { clearGLError, flushGLError } from "./error";
 
 /** Creates a shader program using a vertex and fragment shader */
 export const compileShaderProgram = (gl: WebGL, vertSource: string, fragSource: string): WebGLProgram | null => {

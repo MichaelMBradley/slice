@@ -1,5 +1,5 @@
-import { WebGL } from "./types";
-import { clearGLError, flushGLError } from "./webgl";
+import { WebGL } from ".";
+import { clearGLError, flushGLError } from "./error";
 
 /** Creates a shader object using the given source code */
 const compileShader = (gl: WebGL, type: GLenum, source: string): WebGLShader | null => {
