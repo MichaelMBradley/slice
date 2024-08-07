@@ -25,8 +25,11 @@ pub fn num_hypercube_vertices(dim: usize) -> usize {
     if dim == 0 {
         panic!("Cannot have 0-dimensional hypercube");
     }
-
-    1 << (dim - 1)
+    if dim == 0 {
+        0
+    } else {
+        1 << (dim - 1)
+    }
 }
 
 /// Assuming a hypercube represented as a 1-dimensional array where the axes of each vertex are packed together.
@@ -64,10 +67,9 @@ pub fn hypercube_array_length(dim: usize) -> usize {
 #[wasm_bindgen]
 pub fn initialize_hypercube(dim: usize, arr: &mut [f32]) {
     let vertices = num_hypercube_vertices(dim);
-    let intended_length = hypercube_array_length(dim);
 
     #[cfg(feature = "console_error_panic_hook")]
-    if arr.len() != intended_length {
+    if arr.len() != hypercube_array_length(dim) {
         panic!(
             "Hypercube has {} instead of {} elements",
             arr.len(),
@@ -79,19 +81,22 @@ pub fn initialize_hypercube(dim: usize, arr: &mut [f32]) {
         let arr_index = vert_index * dim;
         // Turn the axes of the vertex into a binary representation of the index
         for offset in 0..dim {
-            arr[arr_index + offset] = if (vert_index & (1 << offset)) != 0 {
-                1.
+            if let Some(element) = arr.get_mut(arr_index + offset) {
+                *element = if (vert_index & (1 << offset)) != 0 {
+                    1.
+                } else {
+                    0.
+                }
             } else {
-                0.
+                #[cfg(feature = "console_error_panic_hook")]
+                panic!(
+                    "Array was somehow missing element at index {}",
+                    arr_index + offset
+                );
+                return;
             }
         }
     }
-}
-
-#[wasm_bindgen]
-extern "C" {
-    #[wasm_bindgen(js_namespace = console)]
-    fn log(s: &str);
 }
 
 /// Does one-time initialization for the WASM code
