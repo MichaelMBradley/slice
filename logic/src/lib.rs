@@ -14,18 +14,18 @@ use wasm_bindgen::prelude::*;
 /// The number of vertices in such a hypercube.
 #[wasm_bindgen]
 pub fn num_hypercube_vertices(dim: usize) -> usize {
-    #[cfg(feature = "console_error_panic_hook")]
-    if dim >= size_of::<usize>() * 8 {
+    if dim == 0 {
+        #[cfg(feature = "console_error_panic_hook")]
+        panic!("Cannot have 0-dimensional hypercube");
+        #[allow(unreachable_code)]
+        0
+    } else if dim >= size_of::<usize>() * 8 {
+        #[cfg(feature = "console_error_panic_hook")]
         panic!(
             "{} is too many dimensions to index vertices of a hypercube",
             dim
         );
-    }
-    #[cfg(feature = "console_error_panic_hook")]
-    if dim == 0 {
-        panic!("Cannot have 0-dimensional hypercube");
-    }
-    if dim == 0 {
+        #[allow(unreachable_code)]
         0
     } else {
         1 << (dim - 1)
@@ -45,16 +45,18 @@ pub fn num_hypercube_vertices(dim: usize) -> usize {
 pub fn hypercube_array_length(dim: usize) -> usize {
     let vertices = num_hypercube_vertices(dim);
 
-    #[cfg(feature = "console_error_panic_hook")]
     if usize::MAX / dim < vertices {
+        #[cfg(feature = "console_error_panic_hook")]
         panic!(
             "{} is too may dimensions to index all vertex fields of a hypercube",
             dim
         );
+        #[allow(unreachable_code)]
+        0
+    } else {
+        // Each vertex needs 1 float for every axis (dimension)
+        dim * vertices
     }
-
-    // Each vertex needs 1 float for every axis (dimension)
-    dim * vertices
 }
 
 /// Initialize the vertices of a `dim`-dimensional hypercube with the values along all axes set to `0` or `1`.
@@ -68,8 +70,9 @@ pub fn hypercube_array_length(dim: usize) -> usize {
 pub fn initialize_hypercube(dim: usize, arr: &mut [f32]) {
     let vertices = num_hypercube_vertices(dim);
 
-    #[cfg(feature = "console_error_panic_hook")]
     if arr.len() != hypercube_array_length(dim) {
+        #[cfg(not(feature = "console_error_panic_hook"))]
+        return;
         panic!(
             "Hypercube has {} instead of {} elements",
             arr.len(),
@@ -88,12 +91,12 @@ pub fn initialize_hypercube(dim: usize, arr: &mut [f32]) {
                     0.
                 }
             } else {
-                #[cfg(feature = "console_error_panic_hook")]
+                #[cfg(not(feature = "console_error_panic_hook"))]
+                return;
                 panic!(
                     "Array was somehow missing element at index {}",
                     arr_index + offset
                 );
-                return;
             }
         }
     }

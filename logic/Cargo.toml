@@ -12,6 +12,7 @@ crate-type = ["cdylib", "rlib"]
 
 [features]
 # Commenting this out drops 6kb at time of writing
+# Although there's an extrra 13kb I can't account for: https://github.com/rustwasm/wasm-pack/issues/1418
 default = ["console_error_panic_hook"]
 
 [dependencies]
