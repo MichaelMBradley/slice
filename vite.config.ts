@@ -1,9 +1,11 @@
 import { defineConfig } from "vite";
 import glsl from "vite-plugin-glsl";
-import wasmPack from "vite-plugin-wasm-pack";
+import topLevelAwait from "vite-plugin-top-level-await";
+import wasm from "vite-plugin-wasm";
 
 export default defineConfig({
-	plugins: [wasmPack("./logic"), glsl({ compress: true })],
+	plugins: [wasm(), glsl({ compress: true }), topLevelAwait()],
 	clearScreen: false,
 	base: "",
+	build: { rollupOptions: { external: ["logic"] } },
 });

@@ -4,7 +4,8 @@
 		"Colour",
 		"Colours",
 		"glsl",
-		"tseslint"
+		"tseslint",
+		"vite"
 	],
 	"editor.formatOnType": false,
 	"editor.formatOnPaste": false,

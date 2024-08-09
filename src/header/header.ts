@@ -1,7 +1,7 @@
 import vertSource from "./vert.vs";
 import fragSource from "./frag.fs";
 
-import { hypercube_array_length, initialize_hypercube } from "logic";
+import { hypercube_array_length, initialize_hypercube } from "../logic";
 
 import { getCanvas, getWebGLContext } from "../html/canvas";
 import { compileShaderProgram } from "../webgl/program";
