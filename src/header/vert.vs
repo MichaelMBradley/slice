@@ -14,7 +14,7 @@ layout(location = 1) in vec4 v1;
 layout(location = 2) in vec4 v2;
 
 vec4 timedLerp(const vec4 vec, const vec4 offset, const vec4 duration) {
-	return vec * mix(vec4(0), vec4(1), (vec4(time) - offset) / duration);
+	return vec * smoothstep(vec4(0), vec4(1), (vec4(time) - offset) / duration);
 }
 
 void main() {
@@ -23,5 +23,6 @@ void main() {
 		timedLerp(v1, lerpOffset[1], lerpDuration[1]),
 		timedLerp(v2, lerpOffset[2], lerpDuration[2])
 	);
-	gl_Position = vec4(lerped[0].xyz, 1);
+	// TODO: All upper points move on lerped[1].x, might be setup wrong
+	gl_Position = vec4(lerped[0].x + lerped[0].z / 2. + lerped[0].w / 5. - lerped[1].x / 8., lerped[0].y + lerped[0].z / 2. - lerped[0].w / 5. - lerped[1].x / 8., 0., 10) / 10.;
 }

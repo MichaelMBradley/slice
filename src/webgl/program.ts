@@ -3,7 +3,7 @@ import { compileFragmentShader, compileVertexShader } from "./shader";
 import { clearGLError, flushGLError } from "./error";
 
 /** Creates a shader program using a vertex and fragment shader */
-export const compileShaderProgram = (gl: WebGL, vertSource: string, fragSource: string): WebGLProgram | null => {
+export const compileShaderProgram = (gl: WebGL, vertSource: string, fragSource: string): WebGLProgram => {
 	// I considered making a more generic function that accepted a list of shader types and sources to
 	// compile together, but WebGL only supports vertex and fragment shaders so there's no point
 	clearGLError(gl);
@@ -41,5 +41,5 @@ export const compileShaderProgram = (gl: WebGL, vertSource: string, fragSource: 
 	} else {
 		flushGLError(gl);
 	}
-	return null;
+	throw new Error("Could not compile shader program");
 };

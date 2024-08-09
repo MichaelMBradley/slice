@@ -4,6 +4,7 @@
 		"Colour",
 		"Colours",
 		"glsl",
+		"lerp",
 		"tseslint",
 		"vite"
 	],

@@ -2,11 +2,12 @@ import { WebGL } from ".";
 
 export interface BaseRenderState {
 	readonly gl: WebGL;
+	readonly program: WebGLProgram;
 }
 
-export type ContinuousRenderState<State extends BaseRenderState> = State & {
+export interface ContinuousRenderState extends BaseRenderState {
 	readonly fps: number;
-};
+}
 
 export type DrawFunction<State extends BaseRenderState> = (state: State) => void;
 
@@ -19,7 +20,7 @@ export type RenderLoopID = number;
  * @param state The information for each render
  * @returns The ID of this render loop
  */
-export const startContinuousRender = <State extends ContinuousRenderState<BaseRenderState>>(
+export const startContinuousRender = <State extends ContinuousRenderState>(
 	draw: DrawFunction<State>,
 	state: State,
 ): RenderLoopID => {
