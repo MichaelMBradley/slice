@@ -8,7 +8,10 @@ uniform float time;
 uniform vec4[3] lerpOffset;
 uniform vec4[3] lerpDuration;
 
-// Aparently vertex input arrays and input structs aren't supported in OpenGL ES, so we have to resort to badly-named variables
+// Normal for a plane rotated in 12 dimensions passing through the origin (normalized)
+uniform vec4[3] normal;
+
+// Vertex input arrays and input structs aren't supported in OpenGL ES, so we have to resort to badly-named variables
 layout(location = 0) in vec4 v0;
 layout(location = 1) in vec4 v1;
 layout(location = 2) in vec4 v2;
@@ -18,10 +21,19 @@ vec4 timedLerp(const vec4 vec, const vec4 offset, const vec4 duration) {
 }
 
 void main() {
+	// Lerps from the origin to a vertex of the 12D hypercube
 	vec4[3] lerped = vec4[](
 		timedLerp(v0, lerpOffset[0], lerpDuration[0]),
 		timedLerp(v1, lerpOffset[1], lerpDuration[1]),
 		timedLerp(v2, lerpOffset[2], lerpDuration[2])
+	);
+	// Length of the point projected onto the normal vector
+	float len = dot(lerped[0], normal[0]) + dot(lerped[1], normal[1]) + dot(lerped[2], normal[2]);
+	// Point projected onto rotated plane
+	vec4[3] projected = vec4[](
+		lerped[0] - normal[0] * len,
+		lerped[1] - normal[1] * len,
+		lerped[2] - normal[2] * len
 	);
 	// TODO: All upper points move on lerped[1].x, might be setup wrong
 	gl_Position = vec4(lerped[0].x + lerped[0].z / 2. + lerped[0].w / 5. - lerped[1].x / 8., lerped[0].y + lerped[0].z / 2. - lerped[0].w / 5. - lerped[1].x / 8., 0., 10) / 10.;

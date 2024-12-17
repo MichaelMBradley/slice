@@ -71,13 +71,14 @@ pub fn initialize_hypercube(dim: usize, arr: &mut [f32]) {
     let vertices = num_hypercube_vertices(dim);
 
     if arr.len() != hypercube_array_length(dim) {
-        #[cfg(not(feature = "console_error_panic_hook"))]
-        return;
+        #[cfg(feature = "console_error_panic_hook")]
         panic!(
             "Hypercube has {} instead of {} elements",
             arr.len(),
             dim * vertices
         );
+        #[allow(unreachable_code)]
+        return;
     }
 
     for vert_index in 0..vertices {
@@ -91,12 +92,53 @@ pub fn initialize_hypercube(dim: usize, arr: &mut [f32]) {
                     0.
                 }
             } else {
-                #[cfg(not(feature = "console_error_panic_hook"))]
-                return;
+                #[cfg(feature = "console_error_panic_hook")]
                 panic!(
                     "Array was somehow missing element at index {}",
                     arr_index + offset
                 );
+                #[allow(unreachable_code)]
+                return;
+            }
+        }
+    }
+}
+
+/// Rotate a point around every axis in a set order
+///
+/// ## Arguments
+///
+/// * `amount` - The amount to rotate about each axis.
+/// * `arr` - Point to rotate.
+#[wasm_bindgen]
+pub fn rotate_about_each_axis(amount: f32, arr: &mut [f32]) {
+    #[cfg(feature = "console_error_panic_hook")]
+    if arr.len() < 2 {
+        panic!(
+            "Point must have at least 2 dimensions to rotate (had {})",
+            arr.len()
+        );
+    }
+    rotate_about_each_axis_implementation(amount.cos(), amount.sin(), arr)
+}
+
+pub fn rotate_about_each_axis_implementation(cos: f32, sin: f32, arr: &mut [f32]) {
+    for i in 0..(arr.len() - 1) {
+        for j in (i + 1)..arr.len() {
+            if let Some(x) = arr.get(i) {
+                if let Some(y) = arr.get(j) {
+                    let rot = (cos * x - sin * y, sin * x + cos * y);
+                } else {
+                    #[cfg(feature = "console_error_panic_hook")]
+                    panic!("Somehow failed to get array index {} of {}", j, arr.len());
+                    #[allow(unreachable_code)]
+                    return;
+                }
+            } else {
+                #[cfg(feature = "console_error_panic_hook")]
+                panic!("Somehow failed to get array index {} of {}", i, arr.len());
+                #[allow(unreachable_code)]
+                return;
             }
         }
     }
