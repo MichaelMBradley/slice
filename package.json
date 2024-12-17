@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"wasm": "wasm-pack build ./logic",
-		"dev": "yarn wasm && vite",
+		"dev": "yarn wasm && vite --host 127.0.0.1",
 		"build": "yarn wasm && vite build && tsc",
 		"preview": "yarn build && vite preview"
 	},
